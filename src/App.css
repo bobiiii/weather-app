@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card {
+  @apply bg-gray-800 border border-transparent hover:border-x-yellow-600 p-4 overflow-hidden rounded-3xl;
+}
