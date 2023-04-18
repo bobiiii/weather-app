@@ -23,7 +23,7 @@ function App() {
       );
 
       const res = await axios.get(`https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&units=metric&APPID=7a25049ebc49924131fffa4b1468e189`)
-      const AQres = await axios.get(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${long}&appid=7a25049ebc49924131fffa4b1468e189`)
+      const AQres = await axios.get(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${long}&appid=7a25049ebc49924131fffa4b1468e189`)
       setData(res.data)
       setAQI(AQres.data.list[0].main.aqi)
       setLoading(false)
