@@ -16,7 +16,7 @@ function Pressure() {
 
                 }
             })
-            console.log(res)
+
             setPressure(res.data.hourly.pressure_msl[0])
         }
         fetchData()

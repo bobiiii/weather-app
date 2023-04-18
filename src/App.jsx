@@ -6,21 +6,21 @@ import useAuth from './Context/useAuth'
 
 function App() {
   const { loading, setLoading, setAQI, lat, setLat, long, setLong, data, setData } = useAuth()
+  async function getLocation() {
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject)
+      })
+      return { lat: position.coords.latitude, long: position.coords.longitude }
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
   useEffect(() => {
     async function getData(params) {
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          setLat(position.coords.latitude);
-          setLong(position.coords.longitude);
-        },
-
-        function (failure) {
-          if (failure.message.indexOf("Only secure origins are allowed") == 0) {
-            alert('Only secure origins are allowed by your browser.');
-          }
-        }
-
-      );
+      const { lat, long } = await getLocation()
 
       const res = await axios.get(`https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&units=metric&APPID=7a25049ebc49924131fffa4b1468e189`)
       const AQres = await axios.get(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${long}&appid=7a25049ebc49924131fffa4b1468e189`)
@@ -30,10 +30,10 @@ function App() {
     }
 
     getData()
-    console.log(lat)
-    console.log(long)
-    console.log("Latitude is:", lat)
-    console.log("Longitude is:", long)
+    // console.log(lat)
+    // console.log(long)
+    // console.log("Latitude is:", lat)
+    // console.log("Longitude is:", long)
   }, [lat, long]);
 
 

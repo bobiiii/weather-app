@@ -17,8 +17,7 @@ function FeelsLike() {
                 }
             })
             setFeelLike(res.data.hourly.apparent_temperature[0])
-            console.log(feelLike)
-            console.log(res)
+
 
 
         }
